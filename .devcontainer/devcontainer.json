@@ -1,0 +1,57 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/php
+{
+	"name": "PHP",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build": { "dockerfile": "Dockerfile" },
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8080],
+
+	// Make sure that the .secrets.env file exists
+	// it is used to hold local secrets, and other local environment variables
+	// the .env file is the template for the .secrets.env file
+	// if the .secrets.env file exists, it is left alone.
+	// the initializeCommand.cmd file is stored in the workspaceFolder root
+	// because path separator cannot be specified for the environment
+	// the initializeCommand file will run in the host context.
+	// It is written such that it is platform independent. It can run on Windows and on Linux hosts.
+	"initializeCommand": "initializeCommand.cmd",
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+	"postCreateCommand": "sudo chmod a+x ./.devcontainer/postCreateCommand.sh && ./.devcontainer/postCreateCommand.sh",
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+	
+	// prevents error message:
+	//    fatal: detected dubious ownership in repository at '/workspaces/php-sapb1'
+    //    To add an exception for this directory, call:
+    //
+    //    git config --global --add safe.directory /workspaces/php-sapb1
+	// see https://www.kenmuse.com/blog/avoiding-dubious-ownership-in-dev-containers/
+	// does not work from within the container context, because it would negate the security efforts
+	// manually run the command from a terminal
+	// "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+
+	"runArgs": [
+		"--env-file",
+		".env",
+		"--env-file",
+		".secrets.env"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"github.vscode-github-actions",
+				"mhutchie.git-graph"
+			]
+		}
+	}
+}

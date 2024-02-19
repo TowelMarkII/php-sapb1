@@ -1,0 +1,6 @@
+# ./initializeCommand.cmd is a special file that can be executed on windows
+# and in a linux type shell
+# the line endings are mixed because the windows section uses crlf and linux shell section lf
+# therefore we do not want the crlf conversion to be triggered
+# and we remove the text attibute
+./initializeCommand.cmd -text

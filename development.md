@@ -10,7 +10,7 @@ We assume that forks only live within github.
 This repository uses `main` as its current 'production' branch. Development loosely follows the gitflow workflow.
 Development is done in `develop`, releases into `release-[short-commit.yyyyMMdd]` branches. Features, bugs, etc. in `features/[id-feature]`, `bugs/[id-bug]` branches.
 
-Versions are released named with the short commit id and date in reverse order and dot concatenated `short-commit.yyyyMMdd`. And the commits are tagged with the released version name.
+Versions are released according to semantic versioning `v[major].[minor].[patch]`. And the commits are tagged with the released version name.
 
 ## Git config
 The git config requires some special additions to make sure that the forks are easily synchronizeable.

@@ -9,17 +9,19 @@ The roadmap for this fork can be found in [roadmap.md](/roadmap.md)
 
 Development will be done according to [development.md](/development.md)
 
+# Current SAP B1S Layer version
+See [releases section](http://github.com/TowelMarkII/) and the [changelog](/changelog.md). It is backwards compatible with SAP Business One Service Layer v10.00.140 by using a version config property. See [Usage and Examples](#usage-and-examples) for details.
+
 # Usage and examples
 
 You can find more examples and the full documentation at https://syedhussim.com/sap-b1/php-sapb1-library-documentation-v1.html
 
 Create an array to store your SAP Business One Service Layer configuration details. 
-
 ```php
 $config = [
-    'https' => true,
     'host' => 'IP or Hostname',
     'port' => 50000,
+    'https' => true,
     'sslOptions' => [
         "cafile" => "path/to/certificate.crt",
         "verify_peer" => true,
@@ -28,6 +30,18 @@ $config = [
     'version' => 2
 ];
 ```
+
+## B1S Layer version
+If your B1S Layer is version 10.00.140 or lower you must add the config property
+```php
+$config = [
+    ...,
+    'b1s_version' => 'v10.00.140',
+    ...
+]
+```
+
+The default for the config property is 'v10.00.210' or higher. If you don't set it.
 
 ## Create a new Service Layer session.
 

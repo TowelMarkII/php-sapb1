@@ -18,6 +18,6 @@ try {
     echo $e->getMessage();
 }
 ?>
-<pre>
+<pre>    
 <? print_r($result) ?>
 </pre>

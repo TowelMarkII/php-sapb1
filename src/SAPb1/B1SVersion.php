@@ -19,7 +19,7 @@ class B1SVersion
     public const int NEWER = 1;
     public function __construct(string $version)
     {
-        $version = $version;
+        $this->version = $version;
         $semantic = explode("-", $version);
         if (count($semantic) >= 2) {
             $this->build = $semantic[1];
@@ -65,6 +65,10 @@ class B1SVersion
             }
         }
         return B1SVersion::EQUAL;
+    }
+
+    public function __toString(){
+        return $this->version;
     }
 }
 ?>

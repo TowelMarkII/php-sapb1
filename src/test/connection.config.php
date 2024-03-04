@@ -1,18 +1,27 @@
 <?
-error_reporting(E_ALL);
 
 if (empty(getenv("SAP_HOST"))) {
     echo "No SAP_HOST environment variable configured";
     die();
 }
+$dist = '../../dist';
+$phar = "$dist/sapb1.phar";
+$unbuilt = "$dist/sapb1/index.php";
+$src = '../../src/sapb1/index.php';
 
-$phar = '../../dist/sapb1.phar';
+if(file_exists($unbuilt)) {
+    require_once $unbuilt;
+    ?><pre>require_once unbuilt phar sapb1: '<?=$unbuilt?>'</pre><?
 
-if (file_exists($phar)) {
+} elseif (file_exists($phar)) {
     require_once $phar;
-} else {
+    ?><pre>require_once built phar sapb1: '<?=$phar?>'</pre><?
+} elseif(file_exists($src)) {
+    require_once $src;
+    ?><pre>require_once src sapb1: '<?=$src?>'</pre><?
+} else{
 ?>
-    <h1 style="color: red">Could not find '<?= $phar ?>'. Has the build been kicked off yet?</h1>
+    <h1 style="color: red">Could not find '<?= $phar ?>' or '<?=$unbuilt?>' or '<?=$src?>'. Has the build been kicked off yet?</h1>
 <?
     die();
 }
